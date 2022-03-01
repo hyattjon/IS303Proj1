@@ -1,4 +1,4 @@
-<!--Jonathan Hyatt-->
+<!--Jonathan Hyatt, Olivia Wride, Spencer Burkert, Brighton Lucas, Henry Matsen-->
 <!--Section 003-->
 <!--Program to Calculate entrance into BIS program-->
 <!DOCTYPE html>
@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Project 1</title>
 </head>
 <body>
     
@@ -74,13 +74,17 @@
 
     <!--BYU Last 30 credits GPA-->
     <label>BYU Last 30 Credits GPA: </label><input type="text"><br><br>
-
+    <svg viewBox="0 0 60 60" width="40" height="40">
+    <circle id="myCircle" cx="30" cy="30" r="25" stroke="#4DA167" stroke-width="10" fill="transparent" display="none" />
+    </svg>
+    <br>
     <!--Buttons-->
     <button type="button">Calculate</button><br><br>
     <button type="button">Reset</button>
 
 
     <!--Javascript-->
+    <!--This eventually needs to go in the head section-->
     <script>
         //onLoad()
         function onLoad()
@@ -96,7 +100,24 @@
             
             style.fill = "none";
         }
-
+        
+        //put this at the end of the calcGPA() function
+        if (fTotalGPA >= 3.7)
+        {               
+            //green                          
+            document.getElementById("myCircle").style.stroke="#4DA167";
+        }
+        else if (fTotalGPA >= 3.4)
+        {          
+            //yellow                             
+            document.getElementById("myCircle").style.stroke="#EAC435";
+        }
+        else 
+        {
+            //red
+            document.getElementById("myCircle").style.stroke="#C1292E";
+        }
+        document.getElementById("myCircle").style.display = "block";   
     </script>
 </body>
 </html>
