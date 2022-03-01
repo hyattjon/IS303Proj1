@@ -1,0 +1,102 @@
+<!--Jonathan Hyatt-->
+<!--Section 003-->
+<!--Program to Calculate entrance into BIS program-->
+<!DOCTYPE html>
+<html lang="en">
+<head onload="onLoad()">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!--Input Boxes-->
+    <!--IS 201-->
+    <label>IS 201</label>
+    <!--Dropdown Options-->
+    <select id="IS201">
+        <option value="4" id="IS20" selected>A</option>
+        <option value="3.7">A-</option>
+        <option value="3.4">B+</option>
+        <option value="3">B</option>
+        <option value="2.7">B-</option>
+        <option value="2.4">C+</option>
+        <option value="2">C</option>
+        <option value="1.7">C-</option>
+        <option value="1.4">D+</option>
+        <option value="1">D</option>
+        <option value="0.7">D-</option>
+        <option value="0">E</option>
+    </select>
+    <!--Retake Checkbox-->
+    <input type="checkbox" id="IS201Chk"><label>Retake</label><br><br>
+
+    <!--IS 303 / CS 142-->
+    <label>IS 303 / CS 142</label>
+    <!--Dropdown Options-->
+    <select id="IS303">
+        <option value="4" selected>A</option>
+        <option value="3.7">A-</option>
+        <option value="3.4">B+</option>
+        <option value="3">B</option>
+        <option value="2.7">B-</option>
+        <option value="2.4">C+</option>
+        <option value="2">C</option>
+        <option value="1.7">C-</option>
+        <option value="1.4">D+</option>
+        <option value="1">D</option>
+        <option value="0.7">D-</option>
+        <option value="0">E</option>
+    </select>
+    <input type="checkbox" false><label>Retake</label><br><br>
+    <!--ACC 200-->
+    
+    <label>ACC 200</label>
+    <select>
+        <option value="4" selected>A</option>
+        <option value="3.7">A-</option>
+        <option value="3.4">B+</option>
+        <option value="3">B</option>
+        <option value="2.7">B-</option>
+        <option value="2.4">C+</option>
+        <option value="2">C</option>
+        <option value="1.7">C-</option>
+        <option value="1.4">D+</option>
+        <option value="1">D</option>
+        <option value="0.7">D-</option>
+        <option value="0">E</option>
+    </select>
+
+    <input type="checkbox" false><label>Retake</label><br><br>
+    <!--BYU overall GPA-->
+    <label>BYU Overall GPA: </label><input type="text"><br><br>
+
+    <!--BYU Last 30 credits GPA-->
+    <label>BYU Last 30 Credits GPA: </label><input type="text"><br><br>
+
+    <!--Buttons-->
+    <button type="button">Calculate</button><br><br>
+    <button type="button">Reset</button>
+
+
+    <!--Javascript-->
+    <script>
+        //onLoad()
+        function onLoad()
+        {
+            document.getElementById("IS201").focus();
+        }
+
+        //clearCircle();
+        function clearCircle()
+        {
+            document.getElementById("IS201").style.display = "none";
+            document.getElementById("IS201Chk").style.fill = "none";
+            
+            style.fill = "none";
+        }
+
+    </script>
+</body>
+</html>
