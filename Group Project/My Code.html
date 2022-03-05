@@ -69,11 +69,11 @@
         <option value="0.7">D-</option>
         <option value="0">E</option>
     </select>
-    <input type="checkbox" false onclick="retakeCheck()"><label>Retake</label><br><br>
+    <input type="checkbox" id="IS303Chk" onclick="retakeCheck()"><label>Retake</label><br><br>
     <!--ACC 200-->
 
     <label>ACC 200</label>
-    <select>
+    <select id="ACC200">
         <option value="4" selected>A</option>
         <option value="3.7">A-</option>
         <option value="3.4">B+</option>
@@ -88,12 +88,12 @@
         <option value="0">E</option>
     </select>
 
-    <input type="checkbox" false onclick="retakeCheck()"><label>Retake</label><br><br>
+    <input type="checkbox" id="ACC200Chk" onclick="retakeCheck()"><label>Retake</label><br><br>
     <!--BYU overall GPA-->
-    <label>BYU Overall GPA: </label><input type="text"><br><br>
+    <label>BYU Overall GPA: </label><input type="text" id="OGPA"><br><br>
 
     <!--BYU Last 30 credits GPA-->
-    <label>BYU Last 30 Credits GPA: </label><input type="text"><br><br>
+    <label>BYU Last 30 Credits GPA: </label><input type="text" id="LGPA"><br><br>
     <svg viewBox="0 0 60 60" width="40" height="40">
     <circle id="myCircle" cx="30" cy="30" r="25" stroke="#4DA167" stroke-width="10" fill="transparent" display="none" />
     </svg>
@@ -122,10 +122,19 @@
         //clearCircle();
         function clearCircle()
         {
-            document.getElementById("IS201").style.display = "none";
-            document.getElementById("IS201Chk").style.fill = "none";
-            
-            style.fill = "none";
+            document.getElementById("myCircle").style.stroke= "none";
+            document.getElementById("IS201").value = "none";
+            document.getElementById("IS303").value = "none";
+            document.getElementById("ACC200").value = "none";
+            //clear checkboxes
+            document.getElementById("IS201Chk").checked = false;
+            document.getElementById("IS303Chk").checked = false;
+            document.getElementById("ACC200Chk").checked = false;
+            //clear GPA inputs
+            document.getElementById("OGPA").value = "";
+            document.getElementById("LGPA").value = "";
+            fTotalGPA = "";
+            document.getElementById("IS201").focus();
         }
 
 
