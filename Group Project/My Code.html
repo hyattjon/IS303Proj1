@@ -3,40 +3,196 @@
 <!--Program to Calculate entrance into BIS program-->
 <!DOCTYPE html>
 <html lang="en">
-<head onload="onLoad()">
+<head onload="inputFocus();">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="project1.css">
+    <!--Javascript-->
+    <script>
+        //onLoad()
+        //sets focus to first dropdown
+        function inputFocus()
+        {
+            document.getElementById("IS201").focus();
+        }
+        //clearCircle()
+        function clearCircle()
+        {
+            //clear circle
+            document.getElementById("myCircle").style.stroke= "none";
+            document.getElementById("myCircle").display = "none";
+            //clear dropdowns
+            document.getElementById("IS201").value = "none";
+            document.getElementById("IS303").value = "none";
+            document.getElementById("ACC200").value = "none";
+            //clear checkboxes
+            document.getElementById("IS201Chk").checked = false;
+            document.getElementById("IS303Chk").checked = false;
+            document.getElementById("ACC200Chk").checked = false;
+            //clear GPA inputs
+            document.getElementById("OGPA").value = "";
+            document.getElementById("LGPA").value = "";
+            document.getElementById("calculatedGPA").innerHTML = "";
+            fTotalGPA = "";
+            inputFocus();
+        }
+        //This function calculates your total GPA taking inputs from each class,
+        // your GPA and you last 30 credit GPA and multiplying it by the necessary weight
+        function calcGPA()
+        {
+            //This if statement alerts the user if they left a needed field empty
+            if (document.getElementById("IS201").value == "" || document.getElementById("IS303").value == "" ||
+            document.getElementById("ACC200").value == "" || document.getElementById("OGPA").value == "" ||
+            document.getElementById("LGPA").value == "")
+            {
+                alert("You must select an item in each drop down and enter a value in the Overall GPA and Last 30 Credits GPA text boxes!");
+            }
+            else 
+            {
+                //This takes string inputs from the text boxes and converts them to integers
+                //Lowers grade if retake box is checked
+                let grade201;
+                let grade303;
+                let gradeACC;
+                let gradeOverall;
+                let grade30;
+                if (document.getElementById("IS201Chk").checked)
+                {
+                    grade201 = retakeGrade(parseFloat(document.getElementById("IS201").value));
+                }
+                else
+                {
+                    grade201 = parseFloat(document.getElementById("IS201").value);
+                }
+                if (document.getElementById("IS303Chk").checked)
+                {
+                    grade303 = retakeGrade(parseFloat(document.getElementById("IS303").value));
+                }
+                else
+                {
+                    grade303 = parseFloat(document.getElementById("IS303").value);
+                }
+                if (document.getElementById("ACC200Chk").checked)
+                {
+                    gradeACC = retakeGrade(parseFloat(document.getElementById("ACC200").value));
+                }
+                else
+                {
+                    gradeACC = parseFloat(document.getElementById("ACC200").value);
+                }
+                gradeOverall = parseFloat(document.getElementById("OGPA").value);
+                grade30 = parseFloat(document.getElementById("LGPA").value);
+
+                //This is the formula that calculates the final GPA
+                let fTotalGPA = ((grade201 * .3) + (grade303 * .3) + (gradeACC * .05) + (gradeOverall * .15) + (grade30 * .2));
+                //This rounds the GPA to two decimal places
+                fTotalGPA = fTotalGPA.toFixed(2);
+                //This assigns fTotalGPA to Calculated GPA text box
+                document.getElementById("calculatedGPA").innerHTML = fTotalGPA + " GPA";
+                //changes color of the SVG circle and displays it
+                if (fTotalGPA >= 3.7)
+                {
+                    //green
+                    document.getElementById("myCircle").style.stroke="#4DA167";
+                }
+                else if (fTotalGPA >= 3.4)
+                {
+                    //yellow
+                    document.getElementById("myCircle").style.stroke="#EAC435";
+                }
+                else
+                {
+                    //red
+                    document.getElementById("myCircle").style.stroke="#C1292E";
+                }
+                document.getElementById("myCircle").style.display = "block";
+            }
+        }
+        //lowers grade level (called when retakes are checked)
+        function retakeGrade(iGPA)
+        {
+            let newGPA;
+            switch (iGPA)
+            {
+                case 4.0:
+                newGPA = 3.7;
+                break;
+                case 3.7:
+                newGPA = 3.4;
+                break;
+                case 3.4:
+                newGPA = 3;
+                break;
+                case 3:
+                newGPA = 2.7;
+                break;
+                case 2.7:
+                newGPA = 2.4;
+                break;
+                case 2.4:
+                newGPA = 2;
+                break;
+                case 2:
+                newGPA = 1.7;
+                break;
+                case 1.7:
+                newGPA = 1.4;
+                break;
+                case 1.4:
+                newGPA = 1;
+                break;
+                case 1:
+                newGPA = 0.7;
+                break;
+                default:
+                newGPA = 0;
+            }
+            return newGPA;
+        }
+            </script>
     <title>Project 1</title>
 </head>
 <body>
-
-    <!--Fieldset-->
-    <fieldset>
-        <legend>Entrance into IS Program</legend>
-
-        <div>
-            <p>
-                Program Overview
-                The BS Information Systems program is available as a four-year traditional degree or as a five-year integrated option where students earn both the BS IS and MISM degrees. 
-                The BS IS program is a 64-credit degree including pre-management, junior core, management core, and a capstone.
-                Curriculum
-                Information systems students learn to define, develop, and maintain the information system infrastructure that supports the operations of all businesses, governments, and other institutions. 
-                The BS Information Systems degree develops the ability to function effectively as a professional, applying state-of-the-art technology in solving business problems. 
-                Students are trained in business and information systems and taught to understand complex business environments.
-                Built on a solid foundation of business courses, the curriculum advances students’ understanding of technologies in the design and development of information systems. 
-                They gain technical expertise in systems analysis; systems design and implementation; database development and management; programming; telecommunications networking; 2-tier, 3-tier, and n-tier application development; and web application development.
-            </p>
+    <div class="hero">
+        <picture>
+        <img src="Images/project1.jpg">
+        </picture>
+        <div class="overlay">
+            <div class="textwrapper">
+                <h1 class="logo">Information Systems</h1>
+                <div class="btnwrapper">
+                    <button type="submit" class="btn" onclick="window.open('https://marriottschool.byu.edu/infosys/');">More Info</button>
+                </div> 
+            </div>
         </div>
+    </div>
 
-        <!--Header-->
-        <h3>Input your information to see if you qualify.</h3>
+<main>
+    <article>
+    <h2>Entrance into IS Program</h2>
+        <div>
+            <h3>Program Overview</h3>
+            <p>The BS Information Systems program is available as a four-year traditional degree or as a five-year integrated option where students earn both the BS IS and MISM degrees. 
+                The BS IS program is a 64-credit degree including pre-management, junior core, management core, and a capstone.</p>
+            <h3>Curriculum</h3>
+            <p>Information systems students learn to define, develop, and maintain the information system infrastructure that supports the operations of all businesses, governments, and other institutions. 
+                The BS Information Systems degree develops the ability to function effectively as a professional, applying state-of-the-art technology in solving business problems. 
+                Students are trained in business and information systems and taught to understand complex business environments.</p>
+            <p> Built on a solid foundation of business courses, the curriculum advances students’ understanding of technologies in the design and development of information systems. 
+                They gain technical expertise in systems analysis; systems design and implementation; database development and management; programming; telecommunications networking; 
+                2-tier, 3-tier, and n-tier application development; and web application development.</p>
+        </div>
+    </article>
+    <aside>
+    <h2>Input your information to see if you qualify.</h2>
     <!--Input Boxes-->
     <!--IS 201-->
     <label>IS 201</label>
     <!--Dropdown Options-->
     <select id="IS201">
-        <option value="4" id="IS20" selected>A</option>
+        <option value="4" selected>A</option>
         <option value="3.7">A-</option>
         <option value="3.4">B+</option>
         <option value="3">B</option>
@@ -50,7 +206,7 @@
         <option value="0">E</option>
     </select>
     <!--Retake Checkbox-->
-    <input type="checkbox" id="IS201Chk" onclick="retakeCheck()"><label>Retake</label><br><br>
+    <input type="checkbox" id="IS201Chk"><label>Retake</label><br><br>
 
     <!--IS 303 / CS 142-->
     <label>IS 303 / CS 142</label>
@@ -69,7 +225,7 @@
         <option value="0.7">D-</option>
         <option value="0">E</option>
     </select>
-    <input type="checkbox" id="IS303Chk" onclick="retakeCheck()"><label>Retake</label><br><br>
+    <input type="checkbox" id="IS303Chk"><label>Retake</label><br><br>
     <!--ACC 200-->
 
     <label>ACC 200</label>
@@ -88,103 +244,26 @@
         <option value="0">E</option>
     </select>
 
-    <input type="checkbox" id="ACC200Chk" onclick="retakeCheck()"><label>Retake</label><br><br>
+    <input type="checkbox" id="ACC200Chk"><label>Retake</label><br><br>
     <!--BYU overall GPA-->
-    <label>BYU Overall GPA: </label><input type="text" id="OGPA"><br><br>
+    <label>BYU Overall GPA: </label><input type="text" id="OGPA" ><br><br>
 
     <!--BYU Last 30 credits GPA-->
-    <label>BYU Last 30 Credits GPA: </label><input type="text" id="LGPA"><br><br>
+    <label>BYU Last 30 Credits GPA: </label><input type="text" id="LGPA" ><br><br>
+    <div class="calcwrapper">
+    <p id="calculatedGPA"></p>
+    <div class="svg">
     <svg viewBox="0 0 60 60" width="40" height="40">
     <circle id="myCircle" cx="30" cy="30" r="25" stroke="#4DA167" stroke-width="10" fill="transparent" display="none" />
     </svg>
-    <br>
-    <!--Buttons-->
-    <button type="button">Calculate</button><br><br>
-    <button type="button">Reset</button><br><br>
-
-    </fieldset>
-
-    <!--Link to Marriot School Info-->
-    <div>
-        <a href="https://marriottschool.byu.edu/infosys/">See more at marriottschool.byu.edu</a>
     </div>
-
-
-    <!--Javascript-->
-    <!--This eventually needs to go in the head section-->
-    <script>
-        //onLoad()
-        function onLoad()
-        {
-            document.getElementById("IS201").focus();
-        }
-
-        //clearCircle();
-        function clearCircle()
-        {
-            document.getElementById("myCircle").style.stroke= "none";
-            document.getElementById("IS201").value = "none";
-            document.getElementById("IS303").value = "none";
-            document.getElementById("ACC200").value = "none";
-            //clear checkboxes
-            document.getElementById("IS201Chk").checked = false;
-            document.getElementById("IS303Chk").checked = false;
-            document.getElementById("ACC200Chk").checked = false;
-            //clear GPA inputs
-            document.getElementById("OGPA").value = "";
-            document.getElementById("LGPA").value = "";
-            fTotalGPA = "";
-            document.getElementById("IS201").focus();
-        }
-
-
-        //Retake checkbox function
-        function retakeCheck()
-        {   
-            if(document.getElementById("IS201Chk").checked)
-            {
-                sCheckedBox = document.getElementById("IS201").value
-                console.log(sCheckedBox)
-                //document.getElementById()
-                alert("Hi")
-            }
-
-            if(document.getElementById("IS201Chk").checked)
-            {
-                sCheckedBox = document.getElementById("IS201").value
-                console.log(sCheckedBox)
-                //document.getElementById()
-                alert("Hi")
-            }
-            
-            if(document.getElementById("IS201Chk").checked)
-            {
-                sCheckedBox = document.getElementById("IS201").value
-                console.log(sCheckedBox)
-                //document.getElementById()
-                alert("Hi")
-            }
-        }
-
-
-        
-        //put this at the end of the calcGPA() function
-        if (fTotalGPA >= 3.7)
-        {               
-            //green                          
-            document.getElementById("myCircle").style.stroke="#4DA167";
-        }
-        else if (fTotalGPA >= 3.4)
-        {          
-            //yellow                             
-            document.getElementById("myCircle").style.stroke="#EAC435";
-        }
-        else 
-        {
-            //red
-            document.getElementById("myCircle").style.stroke="#C1292E";
-        }
-        document.getElementById("myCircle").style.display = "block";  
-            </script>
+    </div>
+    <!--Buttons-->
+    <div class="buttonwrapper">
+    <button type="button" class="btn" onclick="calcGPA();">Calculate</button><br><br>
+    <button type="button" class="btn" onclick="clearCircle();">Reset</button><br><br>
+    </div>
+</aside>
+</main>
 </body>
 </html>
